@@ -1,4 +1,5 @@
 const monsterHealthBar = document.getElementById('monster-health');
+const monHealth = document.getElementById('mon-health');
 const playerHealthBar = document.getElementById('player-health');
 const bonusLifeEl = document.getElementById('bonus-life');
 
