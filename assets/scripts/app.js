@@ -2,12 +2,15 @@ const ATTACK_VALUE = 10;
 const HEAL_VALUE = 20;
 let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
+let currentPlayerHealth = chosenMaxLife;
 
 monHealth.innerHTML = Math.round(currentMonsterHealth);
 
 function dealDamage() {
-  const damage = dealMonsterDamage(ATTACK_VALUE);
+  let damage = dealMonsterDamage(ATTACK_VALUE);
   currentMonsterHealth -= damage;
+  damage = dealPlayerDamage(ATTACK_VALUE);
+  currentPlayerHealth -= damage;
   monHealth.innerHTML = Math.round(currentMonsterHealth);
 }
 
