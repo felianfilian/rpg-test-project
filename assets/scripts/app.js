@@ -4,19 +4,42 @@ let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 
+let bonusLife = 2;
+
 monHealth.innerHTML = Math.round(currentMonsterHealth);
+
+Start();
+
+function Start() {
+  UpdateUI();
+}
+
+function endRound() {
+  if (currentPlayerHealth <= 0) {
+    currentPlayerHealth = chosenMaxLife;
+    setPlayerHealth(chosenMaxLife);
+    bonusLife -= 1;
+  }
+  UpdateUI();
+}
 
 function dealDamage() {
   let damage = dealMonsterDamage(ATTACK_VALUE);
   currentMonsterHealth -= damage;
   damage = dealPlayerDamage(ATTACK_VALUE);
   currentPlayerHealth -= damage;
-  monHealth.innerHTML = Math.round(currentMonsterHealth);
+  UpdateUI();
+  endRound();
 }
 
 function dealStrongDamage() {
   const damage = dealMonsterDamage(ATTACK_VALUE);
   currentMonsterHealth -= damage;
+  UpdateUI();
+}
+
+function UpdateUI() {
+  bonusLifeEl.innerText = bonusLife;
   monHealth.innerHTML = Math.round(currentMonsterHealth);
 }
 
