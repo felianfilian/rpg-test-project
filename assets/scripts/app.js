@@ -1,9 +1,15 @@
 const ATTACK_VALUE = 10;
 const HEAL_VALUE = 20;
 
-enteredValue = prompt('Max life', '100');
+const attack = 'ATTACK';
+const strongAttack = 'STRONG_ATTACK';
 
-let chosenMaxLife = enteredValue;
+enteredValue = prompt('Max life', '100');
+let chosenMaxLife = parseInt(enteredValue);
+if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+  chosenMaxLife = 100;
+}
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 
@@ -33,26 +39,35 @@ function resetGame() {
   currentPlayerHealth = chosenMaxLife;
 }
 
-function dealDamage() {
-  let damage = dealMonsterDamage(ATTACK_VALUE);
-  currentMonsterHealth -= damage;
+function dealDamage(mode) {
+  if (mode == 'ATTACK') {
+    let damage = dealMonsterDamage(ATTACK_VALUE);
+    currentMonsterHealth -= damage;
+  } else if (mode == 'STRONG_ATTACK') {
+    const damage = dealMonsterDamage(ATTACK_VALUE);
+    currentMonsterHealth -= damage;
+  }
   damage = dealPlayerDamage(ATTACK_VALUE);
   currentPlayerHealth -= damage;
   UpdateUI();
   endRound();
 }
 
-function dealStrongDamage() {
-  const damage = dealMonsterDamage(ATTACK_VALUE);
-  currentMonsterHealth -= damage;
-  UpdateUI();
+function normalAttack() {
+  dealDamage(attack);
 }
+
+function strongAttack() {
+  dealDamage(strongAttack);
+}
+
+function healHandler() {}
 
 function UpdateUI() {
   bonusLifeEl.innerText = bonusLife;
   monHealth.innerHTML = Math.round(currentMonsterHealth);
 }
 
-attackBtn.addEventListener('click', dealDamage);
-strongAttackBtn.addEventListener('click', dealStrongDamage);
-healBtn.addEventListener('click', dealStrongDamage);
+attackBtn.addEventListener('click', normalAttack);
+strongAttackBtn.addEventListener('click', strongAttack);
+healBtn.addEventListener('click', healHandler);
