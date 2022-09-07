@@ -16,11 +16,18 @@ function Start() {
 
 function endRound() {
   if (currentPlayerHealth <= 0) {
-    currentPlayerHealth = chosenMaxLife;
     setPlayerHealth(chosenMaxLife);
     bonusLife -= 1;
+    resetGame();
+  } else if (currentMonsterHealth <= 0) {
+    alert('you won');
   }
   UpdateUI();
+}
+
+function resetGame() {
+  currentMonsterHealth = chosenMaxLife;
+  currentPlayerHealth = chosenMaxLife;
 }
 
 function dealDamage() {
