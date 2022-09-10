@@ -74,8 +74,11 @@ function UpdateUI() {
   monHealth.innerHTML = Math.round(currentMonsterHealth);
 }
 
-function showLog() {}
+function showLog() {
+  console.log(battleLog);
+}
 
 attackBtn.addEventListener('click', normalAttackHandler);
 strongAttackBtn.addEventListener('click', strongAttackHandler);
 healBtn.addEventListener('click', healHandler);
+logBtn.addEventListener('click', showLog);
